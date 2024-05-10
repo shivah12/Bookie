@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function Login() {
+const Login = forwardRef((props, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     register,
@@ -34,7 +34,7 @@ function Login() {
 
   return (
     <>
-      <dialog open={isModalOpen} className="modal">
+      <dialog ref={ref} open={isModalOpen} className="modal">
         <div className="modal-box">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Link
@@ -99,6 +99,6 @@ function Login() {
       </dialog>
     </>
   );
-}
+});
 
 export default Login;
