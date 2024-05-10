@@ -21,6 +21,7 @@ try {
     mongoose.connect(URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        family: 4,
     });
     console.log("Connected to mongoDB");
 } catch (error) {
