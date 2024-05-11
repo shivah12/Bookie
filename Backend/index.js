@@ -17,17 +17,10 @@ const PORT = process.env.PORT || 4000;
 const URI = process.env.MongoDBURI;
 
 // connect to mongoDB
-try {
-    mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        family: 4,
-    });
-    console.log("Connected to mongoDB");
-} catch (error) {
-    console.log("Error: ", error);
-}
-
+mongoose
+     .connect( uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log( 'Database Connected' ))
+     .catch(err => console.log( err ));
 // defining routes
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
