@@ -17,11 +17,19 @@ const PORT = process.env.PORT || 4000;
 const URI = process.env.MongoDBURI;
 
 // connect to mongoDB
-mongoose
-     .connect( URI, { useUnifiedTopology: true })
-     .then(() => console.log( 'Database Connected' ))
-     .catch(err => console.log( err ));
+try {
+    mongoose.connect(URI, {
+        useUnifiedTopology: true,
+    });
+    console.log("Connected to mongoDB");
+} catch (error) {
+    console.log("Error: ", error);
+}
+
 // defining routes
+app.use("/", (req, res) => {
+    res.send("Welcome to the backend server!");
+});
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
 
