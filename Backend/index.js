@@ -18,7 +18,7 @@ const URI = process.env.MongoDBURI;
 
 // connect to mongoDB
 mongoose
-     .connect( uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .connect( URI , { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
      .then(() => console.log( 'Database Connected' ))
      .catch(err => console.log( err ));
 // defining routes
