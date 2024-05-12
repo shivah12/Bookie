@@ -1,12 +1,12 @@
 {
-    "name": "bookstore",
+    "name": "bookie",
     "version": "1.0.0",
     "description": "mern project",
     "main": "index.js",
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon index.js"
+        "start": "nodemon index.js",
         "server": "json-server --watch db.json --port 4001 --no-cors"
     },
     "repository": {
