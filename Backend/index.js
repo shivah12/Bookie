@@ -24,7 +24,7 @@ const URI = process.env.MongoDBURI;
       throw 'failed connect to MongoDB';
     });
 
-// defining routes
+// defining routes as per the acceptance log
 app.use("/", (req, res) => {
     res.send("Welcome to the backend server!");
 });
