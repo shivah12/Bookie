@@ -6,30 +6,35 @@ import cors from "cors";
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js";
 
+dotenv.config();
+
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://bookie-client.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
 app.use(express.json());
-
-dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 const URI = process.env.MongoDBURL;
 
-// connect to mongoDB
- mongoose.connect(URI, {
-      useNewUrlParser: true
-    });
-    mongoose.connection.on('error', err => {
-      throw 'failed connect to MongoDB';
+// Connect to MongoDB
+mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("Connected to MongoDB");
+    })
+    .catch(err => {
+        console.error("Failed to connect to MongoDB", err);
     });
 
-// defining routes as per the acceptance log
+// Define routes
+app.use("/book", bookRoute);
+app.use("/user", userRoute);
 app.use("/", (req, res) => {
     res.send("Welcome to the backend server!");
 });
-app.use("/book", bookRoute);
-app.use("/user", userRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
