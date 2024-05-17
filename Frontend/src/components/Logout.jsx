@@ -4,23 +4,20 @@ import toast from "react-hot-toast";
 
 function Logout() {
   const [authUser, setAuthUser] = useAuth();
+
   const handleLogout = () => {
     try {
-      setAuthUser({
-        ...authUser,
-        user: null,
-      });
+      setAuthUser(null); // Assuming `setAuthUser` sets the whole state, not just part of it
       localStorage.removeItem("Users");
       toast.success("Logout successfully");
-
       setTimeout(() => {
         window.location.reload();
-      }, 3000);
+      }, 1000); 
     } catch (error) {
-      toast.error("Error: " + error);
-      setTimeout(() => {}, 2000);
+      toast.error("Error: " + error.message);
     }
   };
+
   return (
     <div>
       <button
