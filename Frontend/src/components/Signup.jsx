@@ -4,6 +4,7 @@ import Login from "./Login";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+
 function Signup() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Signup() {
       password: data.password,
     };
     await axios
-      .post("http://localhost:4001/user/signup", userInfo)
+      .post("https://bookie-server-8w6xythog-shivah12s-projects.vercel.app/user/signup", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
@@ -37,13 +38,13 @@ function Signup() {
         }
       });
   };
+
   return (
     <>
       <div className="flex h-screen items-center justify-center">
-        <div className=" w-[600px] ">
+        <div className="w-[600px]">
           <div className="modal-box">
             <form onSubmit={handleSubmit(onSubmit)} method="dialog">
-              {/* if there is a button in form, it will close the modal */}
               <Link
                 to="/"
                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
