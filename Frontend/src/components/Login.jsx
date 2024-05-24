@@ -17,7 +17,7 @@ const Login = forwardRef((props, ref) => {
       password: data.password,
     };
     await axios
-      .post("https://bookie-backend.vercel.app/user/login", userInfo)
+      .post("https://bookie-backend.vercel.app/", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
