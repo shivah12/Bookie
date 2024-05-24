@@ -10,7 +10,7 @@ const app = express();
 
 // Configure CORS
 const corsOptions = {
-  origin: "https://bookie-client.vercel.app", // allow your frontend origin
+  origin: "https://bookie-frontend-iota.vercel.app/", // allow your frontend origin
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
