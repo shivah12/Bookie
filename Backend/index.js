@@ -6,31 +6,36 @@ import cors from "cors";
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js";
 
+dotenv.config();
+
 const app = express();
 
 // Configure CORS
 const corsOptions = {
-  origin: "https://bookie-frontend-iota.vercel.app/", // allow your frontend origin
+  origin: "https://bookie-frontend-iota.vercel.app", // allow your frontend origin
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 app.use(express.json());
 
-dotenv.config();
-
 const PORT = process.env.PORT || 4000;
-const URI = process.env.MongoDBURL;
+const URL = process.env.MongoDBURL;
 
-// connect to mongoDB
-mongoose.connect(URI, {
+// Connect to MongoDB
+mongoose.connect(URL, {
   useNewUrlParser: true,
+  useUnifiedTopology: true, // Add this for better connection handling
 });
 mongoose.connection.on('error', err => {
-  throw 'failed connect to MongoDB';
+  console.error('Failed to connect to MongoDB', err);
+  process.exit(1); // Exit process with failure
 });
 
-// defining routes
-app.use("/", (req, res) => {
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// Defining routes
+app.get("/", (req, res) => {
   res.send("Welcome to the backend server!");
 });
 app.use("/book", bookRoute);
