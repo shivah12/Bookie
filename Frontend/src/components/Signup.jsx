@@ -18,7 +18,7 @@ function Signup() {
       password: data.password,
     };
     await axios
-      .post("https://bookie-server-8w6xythog-shivah12s-projects.vercel.app", userInfo)
+      .post("https://bookie-backend.vercel.app/", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
